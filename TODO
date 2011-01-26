@@ -1,0 +1,25 @@
+ - pojedyńcze okno
+   - Qt: QtCore, QtGui, Phonon
+
+ - ustawienie dowolnej daty/godziny
+   - ostrzeżenie przed ustawieniem daty w przeszłości
+
+ - pole wyboru pliku do odtworzenia
+   - standardowe okno dialogowe z filtrem na pliki dźwiękowe
+     obsługiwane przez Phonona
+
+ - po uruchomieniu ukazuje się duży licznik pozostałego czasu
+   - w formie ggg:mm:ss
+   - odliczanie można zatrzymać przed końcem
+
+ - kiedy odgrywany jest dźwięk tworzone jest na froncie okno dialogowe
+   - okienko jest modalne
+   - aby je zamknąć należy przepisać ukazany ciąg 10 losowych znaków
+     alfanumerycznych
+   - nieprawidłowe wpisanie ciągu skutkuje 3-sekundową przerwą
+     w dostępności pola dialogowego
+
+ - plik dźwiękowy jest odtwarzany w pętli
+
+ - program musi upewnić się, że głośność dźwięku w systemie jest
+   maksymalna
