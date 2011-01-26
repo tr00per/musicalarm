@@ -71,7 +71,7 @@
      <string>Dream</string>
     </property>
    </widget>
-   <widget class="QDateTimeEdit" name="dateTimeEdit">
+   <widget class="QDateTimeEdit" name="dt">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -111,7 +111,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="start">
+   <widget class="QPushButton" name="startBtn">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -141,42 +141,9 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections>
-  <connection>
-   <sender>start</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>start()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>68</x>
-     <y>30</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>132</x>
-     <y>27</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>getFile</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>selectFile()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>69</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>163</x>
-     <y>13</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
-  <slot>start()</slot>
   <slot>selectFile()</slot>
+  <slot>start()</slot>
  </slots>
 </ui>

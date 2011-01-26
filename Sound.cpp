@@ -7,7 +7,7 @@ Sound::Sound(const QString & filename):
     mout = new Phonon::AudioOutput(Phonon::MusicCategory);
     mpath = Phonon::createPath(mobj, mout);
 
-    QObject::connect(mobj, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(looping(Phonon::State,Phonon::State)));
+    connect(mobj, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(looping(Phonon::State,Phonon::State)));
 }
 
 Sound::~Sound() {
@@ -18,6 +18,7 @@ Sound::~Sound() {
 
 void Sound::play() {
     playing = true;
+    mobj->play();
 }
 
 void Sound::stop() {

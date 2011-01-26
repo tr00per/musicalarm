@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "ui_MainWindow.h"
+#include "build/ui_MainWindow.h"
 
 class QTimer;
 class Sound;
@@ -13,13 +13,18 @@ public:
     virtual ~MainWindow();
 
 protected:
-    Ui::MainWindow ui;
+    bool dreaming;
     QTimer * timer;
     Sound * snd;
+    Ui::MainWindow ui;
+    int totalTime;
 
-protected slots:
+    const QString longNum(int num, int len) const;
+
+public slots:
     void start();
     void selectFile();
+    void updateTimer();
 };
 
 #endif // MAINWINDOW_H

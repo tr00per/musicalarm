@@ -4,14 +4,16 @@
 #include <QtCore>
 #include <phonon>
 
-class Sound: QObject {
+class Sound: public QObject {
     Q_OBJECT
 public:
     Sound(const QString & filename);
     virtual ~Sound();
 
-    void play();
     void stop();
+
+public slots:
+    void play();
 
 protected:
     bool playing;
