@@ -7,6 +7,8 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 DESTDIR = bin
 OBJECTS_DIR = build
+MOC_DIR = build
+UI_HEADERS_DIR = build
 SOURCES += main.cpp \
     MainWindow.cpp \
     Sound.cpp

@@ -12,7 +12,7 @@ public:
     MainWindow(QWidget *parent = 0);
     virtual ~MainWindow();
 
-private:
+protected:
     Ui::MainWindow ui;
     QTimer * timer;
     Sound * snd;

@@ -1,6 +1,5 @@
 syntax: glob
 *.user
 Makefile*
-moc_*
 bin/*
 build/*

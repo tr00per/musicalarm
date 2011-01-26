@@ -1,17 +1,33 @@
 #include "Sound.h"
 
-Sound::Sound(const QString &filename) {
-    //
+Sound::Sound(const QString & filename):
+    playing(false) {
+    mobj = new Phonon::MediaObject();
+    mobj->setCurrentSource(Phonon::MediaSource(filename));
+    mout = new Phonon::AudioOutput(Phonon::MusicCategory);
+    mpath = Phonon::createPath(mobj, mout);
+
+    QObject::connect(mobj, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(looping(Phonon::State,Phonon::State)));
 }
 
 Sound::~Sound() {
-    //
+    mpath.disconnect();
+    delete mout;
+    delete mobj;
 }
 
 void Sound::play() {
-    //
+    playing = true;
 }
 
 void Sound::stop() {
-    //
+    playing = false;
+    mobj->stop();
+}
+
+void Sound::looping(Phonon::State newstate, Phonon::State oldstate) {
+    if (playing && newstate == Phonon::StoppedState && oldstate == Phonon::PlayingState) {
+        mobj->seek(0);
+        mobj->play();
+    }
 }
