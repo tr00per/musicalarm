@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "Sound.h"
+#include "WakeupBox.h"
 
 #include <QTimer>
 #include <QFileDialog>
@@ -8,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), dreaming(false),
     timer(NULL), snd(NULL) {
     ui.setupUi(this);
+    setFixedSize(342, 214);
 
     ui.dt->setMinimumDateTime(QDateTime::currentDateTime());
     QDateTime now;
@@ -95,5 +97,7 @@ void MainWindow::updateTimer() {
     if (timeLeft <= 0) {
         start();
         snd->play();
+        WakeupBox * wb = new WakeupBox(this);
+        wb->show();
     }
 }

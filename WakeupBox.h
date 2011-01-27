@@ -8,13 +8,14 @@ class WakeupBox : public QDialog {
 public:
     WakeupBox(QWidget *parent = 0);
 
-public slots:
-    void accept();
-    void reject();
-
 private:
     Ui::WakeupBox ui;
     QString secret;
+
+    void resetPassword();
+
+protected slots:
+    void accept();
 };
 
 #endif // WAKEUPBOX_H

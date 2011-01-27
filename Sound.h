@@ -12,14 +12,14 @@ public:
 
     void stop();
 
-public slots:
-    void play();
-
 protected:
     bool playing;
     Phonon::Path mpath;
     Phonon::MediaObject * mobj;
     Phonon::AudioOutput * mout;
+
+public slots:
+    void play();
 
 protected slots:
     void looping(Phonon::State newstate, Phonon::State oldstate);

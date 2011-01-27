@@ -3,8 +3,8 @@
 
  + ustawienie dowolnej daty/godziny
    x ostrzeżenie przed ustawieniem daty w przeszłości
-   + minimalna data/godzina to obecna, domyślna wartość to
-     15 minut w przyszłość
+   + minimalna data/godzina to moment uruchomienia programu
+   + domyślna wartość to 15 minut w przyszłość (do pełnej minuty)
 
  + po uruchomieniu ukazuje się duży licznik pozostałego czasu
    + w formie ggg:mm:ss
@@ -16,11 +16,11 @@
    + standardowe okno dialogowe
    - z filtrem na pliki dźwiękowe obsługiwane przez Phonona
 
- - kiedy odgrywany jest dźwięk tworzone jest na froncie okno dialogowe
+ + kiedy odgrywany jest dźwięk tworzone jest na froncie okno dialogowe
    + okienko jest modalne
-   - aby je zamknąć należy przepisać ukazany ciąg 10 losowych znaków
-     alfanumerycznych
-   - nieprawidłowe wpisanie ciągu skutkuje 3-sekundową przerwą
+   + aby je zamknąć należy przepisać ukazany ciąg 10 losowych znaków
+     (ma znaczenie wielkość liter)
+   + nieprawidłowe wpisanie ciągu skutkuje 3-sekundową przerwą
      w dostępności pola dialogowego
 
  x program musi upewnić się, że głośność dźwięku w systemie jest
@@ -35,4 +35,4 @@
 
  - uczynić bardziej konfigurowalnym
    - zapisywać ilość wymaganych do wpisania znaków w configu
-   - zapisywać dozwolone znaki w configu
+   - zapisywać dozwolone znaki w configu (obecnie [a-zA-Z])
