@@ -1,10 +1,12 @@
 #include "Sound.h"
 
+#include <iostream>
+
 Sound::Sound(const QString & filename):
     playing(false) {
     mobj = new Phonon::MediaObject();
     mobj->setCurrentSource(Phonon::MediaSource(filename));
-    mout = new Phonon::AudioOutput(Phonon::MusicCategory);
+    mout = new Phonon::AudioOutput(Phonon::NotificationCategory);
     mpath = Phonon::createPath(mobj, mout);
 
     connect(mobj, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(looping(Phonon::State,Phonon::State)));

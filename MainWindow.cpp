@@ -10,7 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui.setupUi(this);
 
     ui.dt->setMinimumDateTime(QDateTime::currentDateTime());
-    ui.dt->setTime(QTime::currentTime().addSecs(60*15) );
+    QDateTime now;
+    now.setDate(QDate::currentDate());
+    now.setTime(QTime(QTime::currentTime().hour(), QTime::currentTime().minute()+15, 0, 0));
+    ui.dt->setDateTime(now);
 
     connect(ui.getFile, SIGNAL(clicked()), SLOT(selectFile()));
     connect(ui.startBtn, SIGNAL(clicked()), SLOT(start()));
@@ -38,12 +41,14 @@ void MainWindow::start() {
             totalTime = ui.dt->dateTime().toTime_t() - QDateTime::currentDateTime().toTime_t();
             timer->start(500);
             ui.startBtn->setText(tr("Stop"));
+            ui.dt->setEnabled(false);
             dreaming = true;
         }
     }
     else {
         timer->stop();
         ui.startBtn->setText(tr("Start"));
+        ui.dt->setEnabled(true);
         ui.counter->setText("000:00:00");
         dreaming = false;
     }
@@ -78,10 +83,10 @@ const QString MainWindow::longNum(int num, int len) const {
 }
 
 void MainWindow::updateTimer() {
-    int timeLeft = ui.dt->dateTime().toTime_t() - QDateTime::currentDateTime().toTime_t();
-    int hours = timeLeft / 3600;
+    int timeLeft = QDateTime::currentDateTime().secsTo( ui.dt->dateTime() );
+    int hours = static_cast<int>( floor(timeLeft / 3600.0) );
     int minsec = timeLeft % 3600;
-    int min = minsec / 60;
+    int min = static_cast<int>( floor(minsec / 60.0) );
     int sec = minsec % 60;
 
     ui.counter->setText(longNum(hours, 3) + ":" + longNum(min, 2) + ":" + longNum(sec, 2));

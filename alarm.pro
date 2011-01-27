@@ -11,7 +11,10 @@ MOC_DIR = build
 UI_HEADERS_DIR = build
 SOURCES += main.cpp \
     MainWindow.cpp \
-    Sound.cpp
+    Sound.cpp \
+    WakeupBox.cpp
 HEADERS += MainWindow.h \
-    Sound.h
-FORMS += MainWindow.ui
+    Sound.h \
+    WakeupBox.h
+FORMS += MainWindow.ui \
+    WakeupBox.ui

@@ -17,13 +17,13 @@
    - z filtrem na pliki dźwiękowe obsługiwane przez Phonona
 
  - kiedy odgrywany jest dźwięk tworzone jest na froncie okno dialogowe
-   - okienko jest modalne
+   + okienko jest modalne
    - aby je zamknąć należy przepisać ukazany ciąg 10 losowych znaków
      alfanumerycznych
    - nieprawidłowe wpisanie ciągu skutkuje 3-sekundową przerwą
      w dostępności pola dialogowego
 
- - program musi upewnić się, że głośność dźwięku w systemie jest
+ x program musi upewnić się, że głośność dźwięku w systemie jest
    maksymalna
 
  - możliwość zaznaczenia katalogu zamiast pojedyńczego pliku
@@ -32,3 +32,7 @@
  - zapisanie ostatnio wybranego pliku/katalogu w ustawieniach
    - QConfiguration
    - zapisanie stanu okna wyboru pliku
+
+ - uczynić bardziej konfigurowalnym
+   - zapisywać ilość wymaganych do wpisania znaków w configu
+   - zapisywać dozwolone znaki w configu
