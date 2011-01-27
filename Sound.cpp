@@ -11,6 +11,7 @@ Sound::Sound(const QString & filename):
 }
 
 Sound::~Sound() {
+    mobj->stop();
     mpath.disconnect();
     delete mout;
     delete mobj;
