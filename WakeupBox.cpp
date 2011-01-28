@@ -3,8 +3,9 @@
 #include <QThread>
 #include <cstdlib>
 
-WakeupBox::WakeupBox(QWidget *parent) :
-    QDialog(parent) {
+WakeupBox::WakeupBox(QWidget *parent, int length, const QString & charString) :
+    QDialog(parent), len(length),
+    chars(charString) {
     ui.setupUi(this);
     setFixedSize(337, 110);
 
@@ -19,7 +20,7 @@ void WakeupBox::accept() {
     }
     else {
         ui.input->setEnabled(false);
-        ui.input->setText(("Wrong sequence."));
+        ui.input->setText(tr("Wrong sequence."));
         sleep(3);
         resetPassword();
         ui.input->setText("");
@@ -30,8 +31,8 @@ void WakeupBox::accept() {
 void WakeupBox::resetPassword() {
     secret = "";
 
-    while (secret.length() < 10) {
-        secret += char((rand() % 27) + ((rand()%2 == 0)? 65:97));
+    while (secret.length() < len) {
+        secret += chars[ rand() % chars.length() ];
     }
 
     ui.pasword->setText(secret);

@@ -6,11 +6,13 @@
 class WakeupBox : public QDialog {
     Q_OBJECT
 public:
-    WakeupBox(QWidget *parent = 0);
+    WakeupBox(QWidget *parent, int length, const QString & charString);
 
 private:
     Ui::WakeupBox ui;
     QString secret;
+    int len;
+    QString chars;
 
     void resetPassword();
 

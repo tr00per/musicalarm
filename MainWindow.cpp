@@ -3,22 +3,42 @@
 #include "WakeupBox.h"
 
 #include <QTimer>
+#include <QSettings>
 #include <QFileDialog>
+#include <QStringListModel>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), dreaming(false),
-    timer(NULL), snd(NULL) {
+    QMainWindow(parent), conf(new QSettings(this)),
+    dreaming(false), timer(NULL), snd(NULL) {
     ui.setupUi(this);
     setFixedSize(342, 214);
 
-    ui.dt->setMinimumDateTime(QDateTime::currentDateTime());
     QDateTime now;
     now.setDate(QDate::currentDate());
     now.setTime(QTime(QTime::currentTime().hour(), QTime::currentTime().minute()+15, 0, 0));
     ui.dt->setDateTime(now);
+    ui.dt->setMinimumDateTime(QDateTime::currentDateTime());
+
+    int maxHistory = conf->value("history/max", 5).toInt();
+    for (int i = 0; i < maxHistory; ++i) {
+        QString hist = conf->value("history/" + QString::number(i), QString()).toString();
+        if (hist == "") {
+            break;
+        }
+        ui.musicSrc->insertItem(0, hist, hist);
+    }
+    ui.musicSrc->setCurrentIndex(-1);
+
+    int wbLen = conf->value("wakeup/length", 10).toInt();
+    QString wbChars = conf->value("wakeup/chars",
+                                  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").toString();
+
+    wb = new WakeupBox(this, wbLen, wbChars);
 
     connect(ui.getFile, SIGNAL(clicked()), SLOT(selectFile()));
     connect(ui.startBtn, SIGNAL(clicked()), SLOT(start()));
+    connect(ui.musicSrc, SIGNAL(currentIndexChanged(int)), SLOT(selectHistory(int)));
 }
 
 MainWindow::~MainWindow() {
@@ -30,6 +50,15 @@ MainWindow::~MainWindow() {
     if (snd != NULL) {
         delete snd;
     }
+
+    int maxHistory = conf->value("history/max", 5).toInt();
+    for (int i = 0; i < maxHistory && i < ui.musicSrc->count(); ++i) {
+        conf->setValue("history/" + QString::number(i), ui.musicSrc->itemText(i));
+    }
+    conf->setValue("history/max", maxHistory);
+    conf->setValue("wakeup/length", conf->value("wakeup/length", 10).toInt());
+    conf->setValue("wakeup/chars", conf->value("wakeup/chars",
+                   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").toString());
 }
 
 void MainWindow::start() {
@@ -43,6 +72,8 @@ void MainWindow::start() {
             totalTime = ui.dt->dateTime().toTime_t() - QDateTime::currentDateTime().toTime_t();
             timer->start(500);
             ui.startBtn->setText(tr("Stop"));
+            ui.getFile->setEnabled(false);
+            ui.musicSrc->setEnabled(false);
             ui.dt->setEnabled(false);
             dreaming = true;
         }
@@ -50,6 +81,8 @@ void MainWindow::start() {
     else {
         timer->stop();
         ui.startBtn->setText(tr("Start"));
+        ui.getFile->setEnabled(true);
+        ui.musicSrc->setEnabled(true);
         ui.dt->setEnabled(true);
         ui.counter->setText("000:00:00");
         dreaming = false;
@@ -65,11 +98,8 @@ void MainWindow::selectFile() {
         files = fd.selectedFiles();
 
         const QString & file = files.at(0);
-        ui.musicSrc->setText(file);
-        if (snd != NULL) {
-            delete snd;
-        }
-        snd = new Sound(file);
+        ui.musicSrc->insertItem(0, file, file);
+        ui.musicSrc->setCurrentIndex(0);
     }
 }
 
@@ -96,8 +126,29 @@ void MainWindow::updateTimer() {
 
     if (timeLeft <= 0) {
         start();
+        ui.dreamProg->setValue(100);
         snd->play();
-        WakeupBox * wb = new WakeupBox(this);
         wb->show();
     }
+}
+
+void MainWindow::selectHistory(int which) {
+    if (which == -1) {
+        return;
+    }
+
+    QString filename = ui.musicSrc->itemText(which);
+
+    if (!QFile::exists(filename)) {
+        ui.musicSrc->removeItem(which);
+        ui.musicSrc->setCurrentIndex(-1);
+        QMessageBox::information(this, tr("Wrong file!"),
+                                 tr("File ") + filename + tr(" does not exist!"));
+        return;
+    }
+
+    if (snd != NULL) {
+        delete snd;
+    }
+    snd = new Sound(filename);
 }

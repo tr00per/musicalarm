@@ -12,8 +12,9 @@
 
   + plik dźwiękowy jest odtwarzany w pętli
 
-  + pole wyboru pliku do odtworzenia
+  ~ pole wyboru pliku do odtworzenia
    + standardowe okno dialogowe
+   + lista ostatnio używanych plików w combo boksie
    - z filtrem na pliki dźwiękowe obsługiwane przez Phonona
 
  + kiedy odgrywany jest dźwięk tworzone jest na froncie okno dialogowe
@@ -29,10 +30,11 @@
  - możliwość zaznaczenia katalogu zamiast pojedyńczego pliku
    - program wybiera losowy utwór z katalogu (rekurencyjnie)
 
- - zapisanie ostatnio wybranego pliku/katalogu w ustawieniach
-   - QConfiguration
-   - zapisanie 5 ostatnich lokalizacji (combo box)
+ + zapisanie ostatnio wybranego pliku/katalogu w ustawieniach
+   + QSettings
+   + zapisanie 5 ostatnich lokalizacji (combo box)
 
- - uczynić bardziej konfigurowalnym
-   - zapisywać ilość wymaganych do wpisania znaków w configu
-   - zapisywać dozwolone znaki w configu (obecnie [a-zA-Z])
+ + uczynić bardziej konfigurowalnym
+   + zapisywać ilość wymaganych do wpisania znaków w configu
+   + zapisywać ilość zapamiętywanych utworów
+   + zapisywać dozwolone znaki w configu (obecnie [a-zA-Z])
