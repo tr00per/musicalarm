@@ -31,7 +31,7 @@
 
  - zapisanie ostatnio wybranego pliku/katalogu w ustawieniach
    - QConfiguration
-   - zapisanie stanu okna wyboru pliku
+   - zapisanie 5 ostatnich lokalizacji (combo box)
 
  - uczynić bardziej konfigurowalnym
    - zapisywać ilość wymaganych do wpisania znaków w configu
