@@ -14,11 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui.setupUi(this);
     setFixedSize(342, 214);
 
-    QDateTime now;
-    now.setDate(QDate::currentDate());
-    now.setTime(QTime(QTime::currentTime().hour(), QTime::currentTime().minute()+15, 0, 0));
+    QDateTime now(QDate::currentDate(),
+                  QTime(QTime::currentTime().hour(), QTime::currentTime().minute()+15, 0, 0));
     ui.dt->setDateTime(now);
     ui.dt->setMinimumDateTime(QDateTime::currentDateTime());
+    ui.dt->setCurrentSection(QDateTimeEdit::HourSection);
 
     int maxHistory = conf->value("history/max", 5).toInt();
     for (int i = 0; i < maxHistory; ++i) {

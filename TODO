@@ -24,7 +24,7 @@
    + nieprawidłowe wpisanie ciągu skutkuje 3-sekundową przerwą
      w dostępności pola dialogowego
 
- x program musi upewnić się, że głośność dźwięku w systemie jest
+ ! program musi upewnić się, że głośność dźwięku w systemie jest
    maksymalna
 
  - możliwość zaznaczenia katalogu zamiast pojedyńczego pliku
@@ -38,3 +38,11 @@
    + zapisywać ilość wymaganych do wpisania znaków w configu
    + zapisywać ilość zapamiętywanych utworów
    + zapisywać dozwolone znaki w configu (obecnie [a-zA-Z])
+
+BŁĘDY:
+ + nieprawidłowe ustawienia daty/godziny
+ ! brak kontroli głośności w systemie
+ ! można odwołać okno dialogowe przez Escape
+ - nieprawidłowe wpisy nie są tak naprawdę usuwane, a ukrywane
+   - zapisywane są nieprawidłowe wpisy historii
+ + sleep/wait w przenośny sposób [single-shot QTimer]

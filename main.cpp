@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QTextCodec>
 #include <cstdlib>
+#include <ctime>
 
 int main(int argc, char *argv[])
 {

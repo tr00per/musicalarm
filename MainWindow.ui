@@ -117,26 +117,6 @@
     <property name="correctionMode">
      <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
     </property>
-    <property name="dateTime">
-     <datetime>
-      <hour>0</hour>
-      <minute>0</minute>
-      <second>0</second>
-      <year>2011</year>
-      <month>1</month>
-      <day>1</day>
-     </datetime>
-    </property>
-    <property name="date">
-     <date>
-      <year>2011</year>
-      <month>1</month>
-      <day>1</day>
-     </date>
-    </property>
-    <property name="currentSection">
-     <enum>QDateTimeEdit::HourSection</enum>
-    </property>
     <property name="displayFormat">
      <string notr="true">yyyy-MM-dd HH:mm</string>
     </property>

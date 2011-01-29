@@ -1,6 +1,6 @@
 #include "WakeupBox.h"
 
-#include <QThread>
+#include <QTimer>
 #include <cstdlib>
 
 WakeupBox::WakeupBox(QWidget *parent, int length, const QString & charString) :
@@ -21,11 +21,14 @@ void WakeupBox::accept() {
     else {
         ui.input->setEnabled(false);
         ui.input->setText(tr("Wrong sequence."));
-        sleep(3);
-        resetPassword();
-        ui.input->setText("");
-        ui.input->setEnabled(true);
+        QTimer::singleShot(3000, this, SLOT(reenable()));
     }
+}
+
+void WakeupBox::reenable() {
+    resetPassword();
+    ui.input->setText("");
+    ui.input->setEnabled(true);
 }
 
 void WakeupBox::resetPassword() {

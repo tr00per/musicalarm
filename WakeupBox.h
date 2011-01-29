@@ -18,6 +18,7 @@ private:
 
 protected slots:
     void accept();
+    void reenable();
 };
 
 #endif // WAKEUPBOX_H
